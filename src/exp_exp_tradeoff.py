@@ -2,7 +2,7 @@ import numpy as np
 
 
 
-def predict_action(explore_start, explore_stop, decay_rate, decay_step, state, possible_actions):
+def predict_action(explore_start, explore_stop, decay_rate, decay_step, state, possible_actions, gamma):
     """
     Choose action a from state s using epsilon greedy strategy. Calculate exploration probability.
     
