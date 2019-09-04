@@ -3,7 +3,7 @@ import random
 
 
 
-def predict_action(explore_start, explore_stop, decay_rate, decay_step, state, possible_actions, gamma, gamma_decay_rate):
+def predict_action(explore_start, explore_stop, decay_rate, decay_step, state, possible_actions, gamma_start, gamma_decay_rate, step):
     """
     Choose action a from state s using epsilon greedy strategy. Calculate exploration probability. And decrease gamma.
     
@@ -34,6 +34,6 @@ def predict_action(explore_start, explore_stop, decay_rate, decay_step, state, p
         choice = np.argmax(Qs)
         action = possible_actions[choice]
     
-    gamma = gamma * np.exp(-gamma_decay_rate * decay_step)
+    gamma = gamma_start * np.exp(-gamma_decay_rate * step)
 
     return action, explore_probability, gamma
