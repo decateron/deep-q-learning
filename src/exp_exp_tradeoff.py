@@ -1,3 +1,14 @@
+"""
+Module: 
+    exp_exp_tradeoff.py
+Overview:
+    This module hepls to decide between take a random action or take the action that offers our DQN.
+Functions:
+    predict_action
+"""
+
+
+
 import numpy as np
 import random
 

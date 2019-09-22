@@ -4,7 +4,7 @@ Module:
 Overview:
     In this module, I build an agent (Deep Q Neural Network).
     This Neural Network will decide which action to take in this game state.
-Classed:
+Classes:
     DQNetwork
 """
 

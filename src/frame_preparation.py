@@ -1,3 +1,17 @@
+"""
+Module: 
+    frame_preparation.py
+Overview:
+    This module helps to preprocess our frames.
+    Therefore it helps to reduce the complexity of our states 
+    to reduce the computation time needed for training.
+Functions:
+    preprocess_frame
+    stack_frames
+"""
+
+
+
 from skimage.color import rgb2gray
 from skimage import transform
 import numpy as np

@@ -1,3 +1,15 @@
+"""
+Module:
+    environment.py
+Overview:
+    This module contains a dictionary with names of environments and their action spaces.
+    Also, this module contains a function that creates a specified environment and returns its parameters.
+Functions:
+    create_environment
+"""
+
+
+
 import retro
 import numpy as np
 

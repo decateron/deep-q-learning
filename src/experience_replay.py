@@ -2,11 +2,11 @@
 Module: 
     experience_replay.py
 Overview:
-     This module creates the Experience Replay. It helps to handle two big problems.
-     The first is forgetting previous experiences.
-     The second is the correlation between experiences.
+    This module creates the Experience Replay. It helps to handle two big problems.
+    The first is forgetting previous experiences.
+    The second is the correlation between experiences.
 Classes:
-     Memory
+    Memory
 """
 
 
@@ -19,6 +19,11 @@ from collections import deque  # A deque (double ended queue) is a data type
 
 
 class Memory():
+    """
+    Replay buffer stores experience tuples while interacting with the environment,
+    and then we sample a small batch of tuples to feed our neural network.
+    """
+
     def __init__(self, max_size):
         self.buffer = deque(maxlen=max_size)
     
