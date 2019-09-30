@@ -24,8 +24,9 @@ class Memory():
     and then we sample a small batch of tuples to feed our neural network.
     """
 
-    def __init__(self, max_size):
+    def __init__(self, max_size, stack_frames):
         self.buffer = deque(maxlen=max_size)
+        self.stack_frames = stack_frames
     
     def add(self, experience):
         self.buffer.append(experience)
@@ -57,7 +58,7 @@ class Memory():
             if i == 0:
                 state = env.reset()
 
-                state, stacked_frames = stack_frames(stacked_frames, state, True)
+                state, stacked_frames = self.stack_frames(state, True)
             
             # Get the next_state, the rewards, done by taking a random action
             action = random.choice(possible_actions)
@@ -70,7 +71,7 @@ class Memory():
                 next_state, reward, done, _ = env.step(action)
             
             # Stack the frames
-            next_state, stacked_frames = stack_frames(stacked_frames, next_state, False)
+            next_state, stacked_frames = self.stack_frames(next_state, False)
 
             
             # If the episode is finished
@@ -85,7 +86,7 @@ class Memory():
                 state = env.reset()
 
                 # Stack the frames
-                state, stacked_frames = stack_frames(stacked_frames, state, True)
+                state, stacked_frames = self.stack_frames(state, True)
 
             else:
                 # Add experience to memory
