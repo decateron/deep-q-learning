@@ -57,7 +57,7 @@ class Memory():
             if i == 0:
                 state = env.reset()
 
-                state, stacked_frames = stack_frames(stacked_frames, state, True)
+                state, stacked_frames = stack_frames(state, True)
             
             # Get the next_state, the rewards, done by taking a random action
             action = random.choice(possible_actions)
@@ -70,7 +70,7 @@ class Memory():
                 next_state, reward, done, _ = env.step(action)
             
             # Stack the frames
-            next_state, stacked_frames = stack_frames(stacked_frames, next_state, False)
+            next_state, stacked_frames = stack_frames(next_state, False)
 
             
             # If the episode is finished
@@ -85,7 +85,7 @@ class Memory():
                 state = env.reset()
 
                 # Stack the frames
-                state, stacked_frames = stack_frames(stacked_frames, state, True)
+                state, stacked_frames = stack_frames(state, True)
 
             else:
                 # Add experience to memory
