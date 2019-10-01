@@ -39,9 +39,10 @@ class Memory():
         :return: the random batch of tuples
         """
 
-        batch = np.random.choice(self.buffer, size=batch_size, replace=False)
+        buffer_size = len(self.buffer)
+        index = np.random.choice(np.arange(buffer_size), size = batch_size, replace = False)
         
-        return batch
+        return [self.buffer[i] for i in index]
     
     def instantiate_memory(self, env, possible_actions, crop_size, action_size, commands, stacked_frames, pretrain_length=64,
                            use_commands=False):
