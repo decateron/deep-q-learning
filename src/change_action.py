@@ -18,7 +18,9 @@ import numpy as np
 def action_to_command(action, action_size, commands):
     """
     Change from an action to command, because the environment takes only commands.
-    :param action: The action that produces our DQN
+    :param action: The action that produces our DQN.
+    :param action_size: How many actions we have in this environment ?
+    :param commands: The list of commands.
     :return: The command
     """
 
@@ -69,4 +71,6 @@ def action_to_command(action, action_size, commands):
         command = commands[index]
     elif index < action_size and index == 19:
         command = commands[index]
+    
+    return command
 

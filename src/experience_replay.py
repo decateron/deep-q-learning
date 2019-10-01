@@ -11,6 +11,8 @@ Classes:
 
 
 
+from src.frame_preparation import preprocess_frame, stack_frames
+from src.change_action import action_to_command
 import random
 import numpy as np
 from collections import deque  # A deque (double ended queue) is a data type
@@ -24,9 +26,8 @@ class Memory():
     and then we sample a small batch of tuples to feed our neural network.
     """
 
-    def __init__(self, max_size, stack_frames):
+    def __init__(self, max_size):
         self.buffer = deque(maxlen=max_size)
-        self.stack_frames = stack_frames
     
     def add(self, experience):
         self.buffer.append(experience)
@@ -34,7 +35,6 @@ class Memory():
     def sample(self, batch_size):
         """
         Return a random batch of tuples from the buffer.
-
         :param batch_size: The size of the batch that will be returned.
         :return: the random batch of tuples
         """
@@ -43,7 +43,8 @@ class Memory():
         
         return batch
     
-    def instantiate_memory(self, env, possible_actions, pretrain_length=64, use_commands=False):
+    def instantiate_memory(self, env, possible_actions, crop_size, action_size, commands, stacked_frames, pretrain_length=64,
+                           use_commands=False):
         """
         Here we'll deal with the empty memory problem:
         we pre-populate our memory by taking random actions and storing the experience(state, action, reward, next_state)
@@ -58,20 +59,20 @@ class Memory():
             if i == 0:
                 state = env.reset()
 
-                state, stacked_frames = self.stack_frames(state, True)
+                state, stacked_frames = stack_frames(stacked_frames, state, True, crop_size)
             
             # Get the next_state, the rewards, done by taking a random action
             action = random.choice(possible_actions)
 
             if use_commands:
                 # Change from an action to command
-                command = change_action(action)
+                command = action_to_command(action, action_size, commands)
                 next_state, reward, done, _ = env.step(command)
             else:
                 next_state, reward, done, _ = env.step(action)
             
             # Stack the frames
-            next_state, stacked_frames = self.stack_frames(next_state, False)
+            next_state, stacked_frames = stack_frames(stacked_frames, next_state, False, crop_size)
 
             
             # If the episode is finished
@@ -86,7 +87,7 @@ class Memory():
                 state = env.reset()
 
                 # Stack the frames
-                state, stacked_frames = self.stack_frames(state, True)
+                state, stacked_frames = stack_frames(stacked_frames, state, True, crop_size)
 
             else:
                 # Add experience to memory

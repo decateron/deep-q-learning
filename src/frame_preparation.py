@@ -15,14 +15,16 @@ Functions:
 from skimage.color import rgb2gray
 from skimage import transform
 import numpy as np
-
+from collections import deque  # A deque (double ended queue) is a data type
+                               # that removes the oldest element each time that you add a new element.
 
 
 def preprocess_frame(frame, crop_size):
     """
     Grayscale each of our frames. Crop the screen. Normalize pixel values. Resize the preprocessed frame.
-
+    
     :param frame: Just a frame.
+    :param crop_size: The cropping parameters (Up, Down, Left, Right).
     :return: preprocessed_frame
     """
 
@@ -31,7 +33,7 @@ def preprocess_frame(frame, crop_size):
 
     # Crop the screen
     # [Up: Down, Left: Right]
-    cropped_frame = gray[crop_size[0]: crop_size[1], crop_size[3]: crop_size[4]]
+    cropped_frame = gray[crop_size[0]: crop_size[1], crop_size[2]: crop_size[3]]
 
     # Normalize Pixel Values
     normalized_frame = cropped_frame / 255.0
@@ -43,19 +45,19 @@ def preprocess_frame(frame, crop_size):
 
 
 
-def stack_frames(state, is_new_episode, stack_size=4):
+def stack_frames(stacked_frames, state, is_new_episode, crop_size, stack_size=4):
     """
     Preprocess frame. Append the frame to the deque. Build the stacked state
-
     :param state: The actual state in the game.
     :param is_new_episode: "True" means that new episode starts. False means that old episode continues.
     :param stack_size: How many states we want to stack ?
+    :param crop_size: The cropping parameters (Up, Down, Left, Right).
     :return: stacked_state and current stacked frames.
     """
 
     # Preprocess frame
-    frame = preprocess_frame(state)
-
+    frame = preprocess_frame(state, crop_size)
+    
     if is_new_episode:
         # Clear our stacked_frames(initialize deque with zero-images one array for each image)
         stacked_frames = deque([np.zeros((110, 84), dtype=np.int) for i in range (stack_size)], maxlen=4)
