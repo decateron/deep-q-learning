@@ -44,7 +44,7 @@ class Memory():
         
         return [self.buffer[i] for i in index]
     
-    def instantiate_memory(self, env, pretrain_length, possible_actions, crop_size, action_size, commands, stacked_frames, pretrain_length=64,
+    def instantiate_memory(self, env, possible_actions, crop_size, action_size, commands, stacked_frames, pretrain_length,
                            use_commands=False):
         """
         Here we'll deal with the empty memory problem:
