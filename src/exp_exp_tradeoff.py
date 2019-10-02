@@ -14,10 +14,13 @@ import random
 
 
 
-def predict_action(explore_start, explore_stop, decay_rate, decay_step, state, possible_actions, gamma_start, gamma_decay_rate, step):
+def predict_action(sess, DQNetwork, explore_start, explore_stop, decay_rate, decay_step,
+                   state, possible_actions, gamma_start, gamma_decay_rate, step):
     """
     Choose action a from state s using epsilon greedy strategy. Calculate exploration probability. And decrease gamma.
     
+    :param sess: Current TensorFlow session.
+    :param DQNetwork: The Agent.
     :param explore_start: Exploration start - hyperparameter.
     :param explore_stop: Exploration start - hyperparameter.
     :param decay_rate: The rate of decreasing exploration probability.
