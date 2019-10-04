@@ -32,6 +32,9 @@ class Memory():
     def add(self, experience):
         self.buffer.append(experience)
     
+    def remove_all(self):
+        self.buffer.clear()
+    
     def sample(self, batch_size):
         """
         Return a random batch of tuples from the buffer.
