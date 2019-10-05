@@ -30,6 +30,6 @@ def generate_gif(frame_number, frames_for_gif, reward, path):
         frames_for_gif[idx] = transform.resize(frame_idx, (420, 320, 3),
                                         preserve_range=True, order=0).astype(np.uint8)
     
-    imageio.mimsave(f'{path}{"_ATARI_frame_{0}_reward_{1}.gif".format(frame_number, reward)}',
+    imageio.mimsave(f'{path}{"_ATARI_episode_{0}_reward_{1}.gif".format(frame_number, reward)}',
                     frames_for_gif, duration=1/30)
                     
