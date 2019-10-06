@@ -31,5 +31,5 @@ def generate_gif(frame_number, frames_for_gif, reward, path):
                                         preserve_range=True, order=0).astype(np.uint8)
     
     imageio.mimsave(f'{path}{"_ATARI_episode_{0}_reward_{1}.gif".format(frame_number, reward)}',
-                    frames_for_gif, duration=1/30)
+                    frames_for_gif, duration=1/30, fps=55)
                     
