@@ -16,7 +16,7 @@ To run this project you need:
 ### After 30 minutes of training
 <img src="gifs/SpaceInvaders-Atari2600/SpaceInvaders_ATARI_episode_40_reward_855.0.gif" width="400">
 
-#### After one hour of training
+### After one hour of training
 <img src="gifs/SpaceInvaders-Atari2600/SpaceInvaders_ATARI_episode_75_reward_835.0.gif" width="400">
 
 ## Asterix
@@ -25,3 +25,11 @@ To run this project you need:
 
 ### After 90 minutes of training
 <img src="gifs/Asterix-Atari2600/Asterix_ATARI_episode_595_reward_950.0.gif" width="400">
+
+## Amidar
+### After one hour of training
+<img src="gifs/Amidar-Atari2600/Amidar_ATARI_episode_118_reward_63.0.gif" width="400">
+
+### After two hours of training
+<img src="gifs/Amidar-Atari2600/Amidar_ATARI_episode_214_reward_68.0.gif" width="400">
+
